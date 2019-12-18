@@ -5,6 +5,9 @@
 
     use DBIx::Class;
 
+    use lib './lib';
+    use My::Schema;
+
     use Data::Dumper;
     #use Devel::Comments;           # uncomment this during development to enable the ### debugging statements
 
@@ -13,16 +16,6 @@ my $user     = 'excavator';
 my $password = 'excavator';
 my $schema = My::Schema->connect('dbi:mysql:database=excavator;host=localhost', $user, $password, '' );
 
-print Dumper $schema->resultset('User')->find(14);
+print Dumper { $schema->resultset('Subreddit')->find('t5_3568k')->get_columns() };
 
 
-
-package My::Schema;
-use base qw/DBIx::Class::Schema/;
-# load My::Schema::Result::* and their resultset classes
-__PACKAGE__->load_namespaces();
-
-package My::Schema::Result::User;
-use base qw/DBIx::Class::Core/;
-__PACKAGE__->table('user');
-__PACKAGE__->add_columns(qw/ username /);

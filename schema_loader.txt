@@ -1,0 +1,4 @@
+To run the DBIx::Class schema loader, run this:
+
+    perl -MDBIx::Class::Schema::Loader=make_schema_at,dump_to_dir:./lib \
+    -e 'make_schema_at("My::Schema", { db_schema => 'excavator', components => ["InflateColumn::DateTime"] }, [ "DBI:mysql:database=excavator;host=localhost", "excavator", "excavator" ])'
