@@ -5,12 +5,19 @@
     use utf8;
     use Encode;
 
+    use lib './lib';
+    use My::Schema;
+
     use Data::Dumper;
 
 my $subreddit = shift @ARGV
     or die "Specify a subreddit.\n";
 
 my $json_encoder = JSON::XS->new->utf8;
+
+my $user     = 'excavator';
+my $password = 'excavator';
+my $schema = My::Schema->connect('dbi:mysql:database=excavator;host=localhost', $user, $password, '' );
 
 my @data = fetch_subreddit($subreddit);
 
@@ -22,13 +29,41 @@ sub fetch_subreddit {
 
     my %combined_data_children;
 
-    my @data = fetch_1000("https://www.reddit.com/r/$subreddit.json");
+    my @data = reddit_fetch_1000("https://www.reddit.com/r/$subreddit.json");
 
-    my $json_out = {data => {children => \@data}};
-    my $filename_out = "$subreddit.json";
-    open my $fout, '>', $filename_out   or die $!;
-    print $fout $json_encoder->encode($json_out);
-    close $fout;
+    #my $json_out = {data => {children => \@data}};
+    #my $filename_out = "$subreddit.json";
+    #open my $fout, '>', $filename_out   or die $!;
+    #print $fout $json_encoder->encode($json_out);
+    #close $fout;
+
+    foreach my $datum (@data) {
+        my $d = $datum->{data};
+
+        $schema->resultset('Subreddit')->find_or_new(
+            {
+                id            => $d->{subreddit_id},
+                subredditname => $d->{subreddit},
+                banned        => 0,
+            } )->insert;
+
+        $schema->resultset('Account')->find_or_new(
+            {
+                accountname => $d->{author},
+            } )->insert;
+
+        $schema->resultset('Link')->find_or_new(
+            {
+                id        => $d->{id},
+                title     => $d->{title},
+                url       => $d->{is_self} ? "" : $d->{url},
+                domain    => $d->{is_self} ? "" : $d->{domain},
+                selftext  => $d->{selftext},
+                account   => $d->{author},
+                subreddit => $d->{subreddit_id},
+            } )->insert;
+
+    }
 
     return @data;
 }
@@ -38,7 +73,7 @@ sub fetch_subreddit {
 
 
 # fetch as many posts as possible, clicking "next" as many times as is necessary
-sub fetch_1000 {
+sub reddit_fetch_1000 {
     my ($url) = @_;
 
     #(my $display_url = $url) =~ s#^.*/##;

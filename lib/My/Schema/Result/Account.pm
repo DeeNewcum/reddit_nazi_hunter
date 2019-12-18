@@ -44,6 +44,7 @@ __PACKAGE__->table("accounts");
 =head2 weight
 
   data_type: 'integer'
+  default_value: 0
   is_nullable: 0
 
 =cut
@@ -52,7 +53,7 @@ __PACKAGE__->add_columns(
   "accountname",
   { data_type => "varchar", is_nullable => 0, size => 45 },
   "weight",
-  { data_type => "integer", is_nullable => 0 },
+  { data_type => "integer", default_value => 0, is_nullable => 0 },
 );
 
 =head1 PRIMARY KEY
@@ -85,8 +86,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07049 @ 2019-12-17 20:50:00
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:JjQyTFfstCUkGT+3LIaAnQ
+# Created by DBIx::Class::Schema::Loader v0.07049 @ 2019-12-18 16:12:19
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:qFCaKHGqlZjOTPwngxLCWw
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

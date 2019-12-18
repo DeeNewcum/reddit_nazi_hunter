@@ -50,6 +50,7 @@ __PACKAGE__->table("subreddits");
 =head2 weight
 
   data_type: 'integer'
+  default_value: 0
   is_nullable: 0
 
 =head2 remark
@@ -72,7 +73,7 @@ __PACKAGE__->add_columns(
   "subredditname",
   { data_type => "varchar", is_nullable => 0, size => 45 },
   "weight",
-  { data_type => "integer", is_nullable => 0 },
+  { data_type => "integer", default_value => 0, is_nullable => 0 },
   "remark",
   { data_type => "varchar", is_nullable => 1, size => 45 },
   "banned",
@@ -123,8 +124,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07049 @ 2019-12-17 20:50:00
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:+kTC8wLxO578F2SzAFZHlw
+# Created by DBIx::Class::Schema::Loader v0.07049 @ 2019-12-18 16:12:19
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:jd6PFh007Gk1VjqT4KWmVw
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
