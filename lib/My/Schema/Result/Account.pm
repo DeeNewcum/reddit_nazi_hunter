@@ -70,24 +70,24 @@ __PACKAGE__->set_primary_key("accountname");
 
 =head1 RELATIONS
 
-=head2 links
+=head2 comments
 
 Type: has_many
 
-Related object: L<My::Schema::Result::Link>
+Related object: L<My::Schema::Result::Comment>
 
 =cut
 
 __PACKAGE__->has_many(
-  "links",
-  "My::Schema::Result::Link",
-  { "foreign.account" => "self.accountname" },
+  "comments",
+  "My::Schema::Result::Comment",
+  { "foreign.author" => "self.accountname" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07049 @ 2019-12-18 16:12:19
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:qFCaKHGqlZjOTPwngxLCWw
+# Created by DBIx::Class::Schema::Loader v0.07049 @ 2019-12-24 11:26:17
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:g/qNg41uiVg4rNrRXQ51KA
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

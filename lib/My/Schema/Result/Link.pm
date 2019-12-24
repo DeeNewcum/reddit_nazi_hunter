@@ -43,15 +43,14 @@ __PACKAGE__->table("links");
 
 =head2 title
 
-  data_type: 'varchar'
+  data_type: 'mediumtext'
   is_nullable: 0
-  size: 256
 
 =head2 url
 
   data_type: 'varchar'
   is_nullable: 1
-  size: 256
+  size: 4096
 
 =head2 selftext
 
@@ -61,22 +60,22 @@ __PACKAGE__->table("links");
 =head2 account
 
   data_type: 'varchar'
-  is_foreign_key: 1
   is_nullable: 0
-  size: 45
+  size: 20
 
 =head2 subreddit
 
   data_type: 'varchar'
   is_foreign_key: 1
   is_nullable: 0
-  size: 45
+  size: 20
 
 =head2 domain
 
   data_type: 'varchar'
+  is_foreign_key: 1
   is_nullable: 1
-  size: 45
+  size: 128
 
 =cut
 
@@ -84,17 +83,17 @@ __PACKAGE__->add_columns(
   "id",
   { data_type => "varchar", is_nullable => 0, size => 10 },
   "title",
-  { data_type => "varchar", is_nullable => 0, size => 256 },
+  { data_type => "mediumtext", is_nullable => 0 },
   "url",
-  { data_type => "varchar", is_nullable => 1, size => 256 },
+  { data_type => "varchar", is_nullable => 1, size => 4096 },
   "selftext",
   { data_type => "mediumtext", is_nullable => 1 },
   "account",
-  { data_type => "varchar", is_foreign_key => 1, is_nullable => 0, size => 45 },
+  { data_type => "varchar", is_nullable => 0, size => 20 },
   "subreddit",
-  { data_type => "varchar", is_foreign_key => 1, is_nullable => 0, size => 45 },
+  { data_type => "varchar", is_foreign_key => 1, is_nullable => 0, size => 20 },
   "domain",
-  { data_type => "varchar", is_nullable => 1, size => 45 },
+  { data_type => "varchar", is_foreign_key => 1, is_nullable => 1, size => 128 },
 );
 
 =head1 PRIMARY KEY
@@ -111,19 +110,24 @@ __PACKAGE__->set_primary_key("id");
 
 =head1 RELATIONS
 
-=head2 account
+=head2 domain
 
 Type: belongs_to
 
-Related object: L<My::Schema::Result::Account>
+Related object: L<My::Schema::Result::Domain>
 
 =cut
 
 __PACKAGE__->belongs_to(
-  "account",
-  "My::Schema::Result::Account",
-  { accountname => "account" },
-  { is_deferrable => 1, on_delete => "RESTRICT", on_update => "RESTRICT" },
+  "domain",
+  "My::Schema::Result::Domain",
+  { domain => "domain" },
+  {
+    is_deferrable => 1,
+    join_type     => "LEFT",
+    on_delete     => "RESTRICT",
+    on_update     => "RESTRICT",
+  },
 );
 
 =head2 subreddit
@@ -137,13 +141,13 @@ Related object: L<My::Schema::Result::Subreddit>
 __PACKAGE__->belongs_to(
   "subreddit",
   "My::Schema::Result::Subreddit",
-  { id => "subreddit" },
+  { subredditname => "subreddit" },
   { is_deferrable => 1, on_delete => "RESTRICT", on_update => "RESTRICT" },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07049 @ 2019-12-19 12:01:49
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:oPYYHvbNO7RQH7CnTEU50w
+# Created by DBIx::Class::Schema::Loader v0.07049 @ 2019-12-24 11:26:17
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Q0AKyMgsv+Ny/O6BArx3Tg
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

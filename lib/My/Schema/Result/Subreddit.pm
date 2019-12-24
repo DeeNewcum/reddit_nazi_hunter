@@ -45,7 +45,7 @@ __PACKAGE__->table("subreddits");
 
   data_type: 'varchar'
   is_nullable: 0
-  size: 45
+  size: 20
 
 =head2 weight
 
@@ -57,7 +57,7 @@ __PACKAGE__->table("subreddits");
 
   data_type: 'varchar'
   is_nullable: 1
-  size: 45
+  size: 256
 
 =head2 banned
 
@@ -71,11 +71,11 @@ __PACKAGE__->add_columns(
   "id",
   { data_type => "varchar", is_nullable => 0, size => 10 },
   "subredditname",
-  { data_type => "varchar", is_nullable => 0, size => 45 },
+  { data_type => "varchar", is_nullable => 0, size => 20 },
   "weight",
   { data_type => "integer", default_value => 0, is_nullable => 0 },
   "remark",
-  { data_type => "varchar", is_nullable => 1, size => 45 },
+  { data_type => "varchar", is_nullable => 1, size => 256 },
   "banned",
   { data_type => "integer", default_value => 0, is_nullable => 1 },
 );
@@ -108,6 +108,21 @@ __PACKAGE__->add_unique_constraint("srname_UNIQUE", ["subredditname"]);
 
 =head1 RELATIONS
 
+=head2 comments
+
+Type: has_many
+
+Related object: L<My::Schema::Result::Comment>
+
+=cut
+
+__PACKAGE__->has_many(
+  "comments",
+  "My::Schema::Result::Comment",
+  { "foreign.subreddit" => "self.subredditname" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
 =head2 links
 
 Type: has_many
@@ -119,13 +134,13 @@ Related object: L<My::Schema::Result::Link>
 __PACKAGE__->has_many(
   "links",
   "My::Schema::Result::Link",
-  { "foreign.subreddit" => "self.id" },
+  { "foreign.subreddit" => "self.subredditname" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07049 @ 2019-12-18 16:12:19
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:jd6PFh007Gk1VjqT4KWmVw
+# Created by DBIx::Class::Schema::Loader v0.07049 @ 2019-12-24 11:26:17
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:AQTeoQVwmCZtCTQ55S3EYA
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

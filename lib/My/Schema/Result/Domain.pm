@@ -45,7 +45,7 @@ __PACKAGE__->table("domains");
 
   data_type: 'varchar'
   is_nullable: 0
-  size: 45
+  size: 128
 
 =head2 weight
 
@@ -64,7 +64,7 @@ __PACKAGE__->add_columns(
   "id",
   { data_type => "integer", is_auto_increment => 1, is_nullable => 0 },
   "domain",
-  { data_type => "varchar", is_nullable => 0, size => 45 },
+  { data_type => "varchar", is_nullable => 0, size => 128 },
   "weight",
   { data_type => "integer", is_nullable => 1 },
   "remark",
@@ -97,9 +97,26 @@ __PACKAGE__->set_primary_key("id");
 
 __PACKAGE__->add_unique_constraint("domain_UNIQUE", ["domain"]);
 
+=head1 RELATIONS
 
-# Created by DBIx::Class::Schema::Loader v0.07049 @ 2019-12-17 20:50:00
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:rVYxOmdlXEaBsdq0MXeuQA
+=head2 links
+
+Type: has_many
+
+Related object: L<My::Schema::Result::Link>
+
+=cut
+
+__PACKAGE__->has_many(
+  "links",
+  "My::Schema::Result::Link",
+  { "foreign.domain" => "self.domain" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
+
+# Created by DBIx::Class::Schema::Loader v0.07049 @ 2019-12-24 11:26:17
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:fIS8WfH3uaQUT4V6nUkyQw
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
