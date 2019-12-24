@@ -55,7 +55,7 @@ __PACKAGE__->table("links");
 
 =head2 selftext
 
-  data_type: 'mediumblob'
+  data_type: 'mediumtext'
   is_nullable: 1
 
 =head2 account
@@ -88,7 +88,7 @@ __PACKAGE__->add_columns(
   "url",
   { data_type => "varchar", is_nullable => 1, size => 256 },
   "selftext",
-  { data_type => "mediumblob", is_nullable => 1 },
+  { data_type => "mediumtext", is_nullable => 1 },
   "account",
   { data_type => "varchar", is_foreign_key => 1, is_nullable => 0, size => 45 },
   "subreddit",
@@ -142,8 +142,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07049 @ 2019-12-18 16:12:19
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:kOYL6WKn3+xhmfXoOsiDaQ
+# Created by DBIx::Class::Schema::Loader v0.07049 @ 2019-12-19 12:01:49
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:oPYYHvbNO7RQH7CnTEU50w
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

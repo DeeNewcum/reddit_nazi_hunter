@@ -49,7 +49,7 @@ __PACKAGE__->table("mq");
 
 =head2 args
 
-  data_type: 'tinyblob'
+  data_type: 'mediumblob'
   is_nullable: 1
 
 =cut
@@ -60,7 +60,7 @@ __PACKAGE__->add_columns(
   "command",
   { data_type => "varchar", is_nullable => 0, size => 45 },
   "args",
-  { data_type => "tinyblob", is_nullable => 1 },
+  { data_type => "mediumblob", is_nullable => 1 },
 );
 
 =head1 PRIMARY KEY
@@ -76,8 +76,8 @@ __PACKAGE__->add_columns(
 __PACKAGE__->set_primary_key("order");
 
 
-# Created by DBIx::Class::Schema::Loader v0.07049 @ 2019-12-17 20:50:00
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:R+6Lk9BFPo0YbAHUFcBUfQ
+# Created by DBIx::Class::Schema::Loader v0.07049 @ 2019-12-19 12:01:49
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:kBR0cOGP9wrtaEsjdcrk6Q
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

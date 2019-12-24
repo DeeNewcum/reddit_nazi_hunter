@@ -19,3 +19,6 @@
 5 /r/whitebeauty            # Heavy overlap with other white supremacist subreddits.
 8 /user/SaulStein
 7 /user/natashatheraptor
+
+#### Private subreddits that I should infiltrate with an alt ####
+/r/definitelynotboogaloo

@@ -1,0 +1,31 @@
+#!/usr/bin/env perl
+
+    use JSON::XS;
+    use LWP::Simple;
+    use utf8;
+    use Encode;
+
+    use lib './lib';
+    use My::Schema;
+
+    use Data::Dumper;
+
+my $user     = 'excavator';
+my $password = 'excavator';
+my $schema = My::Schema->connect('dbi:mysql:database=excavator;host=localhost', $user, $password,
+                { mysql_enable_utf8 => 1} );
+$schema->storage->_do_query("SET CHARACTER SET utf8mb4");         # fix bug with inserting 4-byte UTF-8 characters
+
+my @all = $schema->resultset('Link')->all;
+
+# https://www.reddit.com/r/multiculturalcancer/comments/e8alcx/black_students_survey_peers_on_how_rice_u_can/
+$schema->resultset('Link')->find_or_new(
+    {
+        id        => 'e8alcx',
+        title     => 'Black students survey peers on how Rice U. can show that ‘their lives matter’',
+        url       => '',
+        domain    => '',
+        account   => 'fullbloodedwhitemale',
+        subreddit => 't5_3j00v',
+        selftext  => "📷",
+    } )->insert;

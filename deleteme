@@ -1,0 +1,35 @@
+#!/usr/bin/env perl
+
+    use JSON::XS;
+    use LWP::Simple;
+    use utf8;
+    use Encode;
+
+    use lib './lib';
+    use My::Schema;
+
+    use Data::Dumper;
+
+my $user     = 'excavator';
+my $password = 'excavator';
+my $schema = My::Schema->connect('dbi:mysql:database=excavator;host=localhost', $user, $password, '' );
+
+my @all = $schema->resultset('Link')->all;
+
+#print Dumper \@all;
+
+#print scalar(@all), "\n";
+
+foreach my $row (@all) {
+    #print Dumper $row;
+    print $row->get_column("selftext"), "\n";
+    #print $row->{selftext}, "\n";
+}
+
+#foreach my $row ($schema->resultset('Link')->all) {
+#    print ".\n";
+#    print Dumper $row;
+#    #print $row->{selftext}, "\n";
+#    #print length($row->{selftext}), "\n";
+#}
+
