@@ -57,12 +57,10 @@ sub fetch_subreddit {
                 accountname => $d->{author},
             } )->insert;
 
-        if ($d->{is_self}) {
-            $schema->resultset('Domain')->find_or_new(
-                {
-                    domain => $d->{domain},
-                } )->insert;
-        }
+        $schema->resultset('Domain')->find_or_new(
+            {
+                domain => $d->{domain},
+            } )->insert;
 
         $schema->resultset('Link')->find_or_new(
             {
