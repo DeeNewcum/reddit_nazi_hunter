@@ -19,6 +19,10 @@
 5 /r/whitebeauty            # Heavy overlap with other white supremacist subreddits.
 8 /user/SaulStein
 7 /user/natashatheraptor
+9 /domain/amren.com         # White supremacist.  https://en.wikipedia.org/wiki/American_Renaissance_(magazine)
+10 /user/natashatheraptor
+8 /user/RastaLasagne
+10 /r/13do50
 
 #### Private subreddits that I should infiltrate with an alt ####
 /r/definitelynotboogaloo
