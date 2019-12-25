@@ -19,10 +19,11 @@
 
 ======== larger chunks ========
 
-- start parsing weights.txt, and load things into the various 'weight' columns
-
 - get the message queue up and running -- make it possible to request subreddit-fetches and
   user-fetches and such asynchronously 
+
+- start trying to make recommendations of similar users/subreddits/etc
+            (requires the MQ to be somewhat working first)
 
 - build some sort of web front-end, if for no reason than to be a read-only interface to show what
   data we've collected

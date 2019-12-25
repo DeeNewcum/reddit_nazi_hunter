@@ -38,7 +38,7 @@ __PACKAGE__->table("subreddits");
 =head2 id
 
   data_type: 'varchar'
-  is_nullable: 0
+  is_nullable: 1
   size: 10
 
 =head2 subredditname
@@ -69,7 +69,7 @@ __PACKAGE__->table("subreddits");
 
 __PACKAGE__->add_columns(
   "id",
-  { data_type => "varchar", is_nullable => 0, size => 10 },
+  { data_type => "varchar", is_nullable => 1, size => 10 },
   "subredditname",
   { data_type => "varchar", is_nullable => 0, size => 20 },
   "weight",
@@ -84,27 +84,13 @@ __PACKAGE__->add_columns(
 
 =over 4
 
-=item * L</id>
-
-=back
-
-=cut
-
-__PACKAGE__->set_primary_key("id");
-
-=head1 UNIQUE CONSTRAINTS
-
-=head2 C<srname_UNIQUE>
-
-=over 4
-
 =item * L</subredditname>
 
 =back
 
 =cut
 
-__PACKAGE__->add_unique_constraint("srname_UNIQUE", ["subredditname"]);
+__PACKAGE__->set_primary_key("subredditname");
 
 =head1 RELATIONS
 
@@ -139,8 +125,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07049 @ 2019-12-24 11:26:17
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:AQTeoQVwmCZtCTQ55S3EYA
+# Created by DBIx::Class::Schema::Loader v0.07049 @ 2019-12-25 09:33:55
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:rsuVd8qG8bT32wqGcR3xlw
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

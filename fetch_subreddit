@@ -19,7 +19,6 @@ my $user     = 'excavator';
 my $password = 'excavator';
 my $schema = My::Schema->connect('dbi:mysql:database=excavator;host=localhost', $user, $password, 
         { mysql_enable_utf8 => 1} );
-
 $schema->storage->_do_query("SET CHARACTER SET utf8mb4");         # fix bug with inserting 4-byte UTF-8 characters in MySQL
 
 

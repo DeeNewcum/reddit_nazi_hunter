@@ -3,10 +3,59 @@
     use strict;
     use warnings;
 
+    use lib './lib';
+    use My::Schema;
+
     use Data::Dumper;
 
-my @weighttxt = parse_weightstxt('weights.txt');
-print Dumper \@weighttxt;
+my $user     = 'excavator';
+my $password = 'excavator';
+my $schema = My::Schema->connect('dbi:mysql:database=excavator;host=localhost', $user, $password, 
+        { mysql_enable_utf8 => 1} );
+$schema->storage->_do_query("SET CHARACTER SET utf8mb4");         # fix bug with inserting 4-byte UTF-8 characters in MySQL
+
+my @weightstxt = parse_weightstxt('weights.txt');
+store_weightstxt(@weightstxt);
+print Dumper \@weightstxt;
+
+
+# store the weights.txt data into various places in the database
+sub store_weightstxt
+{
+    my @weightstxt = @_;
+
+    foreach my $row (@weightstxt) {
+        if ($row->{target} =~ m#^/r/([^/]*)#) { #######################################################
+            $schema->resultset('Subreddit')->update_or_create(
+                {
+                    subredditname => $1,
+                    banned        => 0,
+                    weight        => $row->{weight},
+                    remark        => $row->{comment},
+                } );
+
+
+        } elsif ($row->{target} =~ m#^/user/([^/]*)#) { #################################################
+            $schema->resultset('Account')->update_or_create(
+                {
+                    accountname   => $1,
+                    weight        => $row->{weight},
+                    remark        => $row->{comment},
+                } );
+
+
+        } elsif ($row->{target} =~ m#^/domain/([^/]*)#) { ###############################################
+            $schema->resultset('Domain')->update_or_create(
+                {
+                    domain        => $1,
+                    weight        => $row->{weight},
+                    remark        => $row->{comment},
+                } );
+
+        }
+    }
+}
+
 
 sub parse_weightstxt
 {
