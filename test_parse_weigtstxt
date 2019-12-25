@@ -1,0 +1,33 @@
+#!/usr/bin/env perl
+
+    use strict;
+    use warnings;
+
+    use Data::Dumper;
+
+my @weighttxt = parse_weightstxt('weights.txt');
+print Dumper \@weighttxt;
+
+sub parse_weightstxt
+{
+    my ($filename) = @_;
+
+    my @rows;
+
+    open WEIGHTS, $filename     or die "couldn't load $filename: $!";
+    while (<WEIGHTS>) {
+        my %row = (weight => 1, comment => '');
+        s/#+\s*(.*)//;            # comments
+        $row{comment} = $1      if ($1);
+        next unless /\S/;
+        my @fields = split ' ', $_;
+        if ($fields[0] =~ /^\d*$/) {
+            $row{weight} = $fields[0];
+            shift @fields;
+        }
+        $row{target} = $fields[0];
+        push @rows, \%row;
+    }
+
+    return @rows;
+}
