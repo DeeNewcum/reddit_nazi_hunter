@@ -1,5 +1,5 @@
-10 /r/TeamHeckleBerry           # https://archive.ph/jF9Ri
-10 /r/multiculturalcancerx      # https://www.reddit.com/r/AgainstHateSubreddits/comments/ebg0im/rmulticulturalcancer_a_whitesupremacist_subreddit/
+10 /r/TeamHeckleBerry           # BANNED # https://archive.ph/jF9Ri
+10 /r/multiculturalcancer       # https://www.reddit.com/r/AgainstHateSubreddits/comments/ebg0im/rmulticulturalcancer_a_whitesupremacist_subreddit/
 /r/TheCultureOfCritique
 8 /user/Aoip2337              
 8 /user/WereCarrot
@@ -23,6 +23,8 @@
 10 /user/natashatheraptor
 8 /user/RastaLasagne
 10 /r/13do50
+8 /r/OverwhelminglyWhite
+7 /r/JewishContributions   # crypto-facism: https://www.reddit.com/r/jewishcontributions/comments/eez9bo/is_there_a_similar_sub_that_celebrates_african/
 
 #### Private subreddits that I should infiltrate with an alt ####
-/r/definitelynotboogaloo
+# /r/definitelynotboogaloo

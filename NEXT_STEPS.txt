@@ -1,3 +1,29 @@
-- get the scan-subreddit MQ command working (it would be useful to scan a few subreddits before they're banned)
+- use REGEXP_INSTR() to search for a range of things, like /jew|semitism|semitic/
+            https://dev.mysql.com/doc/refman/8.0/en/regexp.html#function_regexp-instr
 
-- get DBIx::Class working
+        SELECT * FROM links
+        WHERE REGEXP_INSTR(title,    'jew|semitic|semitism')
+           OR REGEXP_INSTR(selftext, 'jew|semitic|semitism')
+        ORDER BY score DESC;
+
+        SELECT * FROM links
+        WHERE REGEXP_INSTR(title,    'black|african')
+           OR REGEXP_INSTR(selftext, 'black|african')
+        ORDER BY score DESC;
+
+        SELECT * FROM links
+        WHERE REGEXP_INSTR(title,    'holocaust|gorillion')
+           OR REGEXP_INSTR(selftext, 'holocaust|gorillion')
+        ORDER BY score DESC;
+
+
+======== larger chunks ========
+
+- start parsing weights.txt, and load things into the various 'weight' columns
+
+- get the message queue up and running -- make it possible to request subreddit-fetches and
+  user-fetches and such asynchronously 
+
+- build some sort of web front-end, if for no reason than to be a read-only interface to show what
+  data we've collected
+

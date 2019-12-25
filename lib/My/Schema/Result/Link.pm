@@ -77,6 +77,11 @@ __PACKAGE__->table("links");
   is_nullable: 1
   size: 128
 
+=head2 score
+
+  data_type: 'integer'
+  is_nullable: 0
+
 =cut
 
 __PACKAGE__->add_columns(
@@ -94,6 +99,8 @@ __PACKAGE__->add_columns(
   { data_type => "varchar", is_foreign_key => 1, is_nullable => 0, size => 20 },
   "domain",
   { data_type => "varchar", is_foreign_key => 1, is_nullable => 1, size => 128 },
+  "score",
+  { data_type => "integer", is_nullable => 0 },
 );
 
 =head1 PRIMARY KEY
@@ -146,8 +153,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07049 @ 2019-12-24 11:26:17
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Q0AKyMgsv+Ny/O6BArx3Tg
+# Created by DBIx::Class::Schema::Loader v0.07049 @ 2019-12-24 11:47:49
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:WBMK5NFI7RJhFEBSVgQ/vg
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

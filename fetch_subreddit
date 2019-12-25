@@ -71,6 +71,7 @@ sub fetch_subreddit {
                 selftext  => $d->{selftext},
                 account   => $d->{author},
                 subreddit => $d->{subreddit},
+                score     => $d->{score},
             } )->insert;
 
     }
