@@ -1,3 +1,4 @@
+
 - use REGEXP_INSTR() to search for a range of things, like /jew|semitism|semitic/
             https://dev.mysql.com/doc/refman/8.0/en/regexp.html#function_regexp-instr
 
@@ -21,6 +22,12 @@
 
 - get the message queue up and running -- make it possible to request subreddit-fetches and
   user-fetches and such asynchronously 
+
+    - Q4M?
+    - roll my own?          (probably a terrible idea, but my needs are few)
+    - https://github.com/kbenson/mysql-message-queue
+    - POE::Component::MessageQueue
+    - http://yaketyhack.blogspot.com/search/label/message%20queue
 
 - start trying to make recommendations of similar users/subreddits/etc
             (requires the MQ to be somewhat working first)

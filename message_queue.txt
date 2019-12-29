@@ -1,0 +1,32 @@
+General advice:
+
+- https://stackoverflow.com/questions/297280/the-best-way-to-use-a-db-table-as-a-job-queue-a-k-a-batch-queue-or-message-queu
+
+
+Criticism:
+
+- https://softwareengineering.stackexchange.com/a/231415
+
+- https://stackoverflow.com/questions/13005410/why-do-we-need-message-brokers-like-rabbitmq-over-a-database-like-postgresql
+
+- https://www.eschrade.com/page/why-mysql-is-not-a-queue/
+
+- https://www.cloudamqp.com/blog/2015-11-23-why-is-a-database-not-the-right-tool-for-a-queue-based-system.html
+
+
+
+
+======== DEQUEUE ========
+
+https://stackoverflow.com/a/7303772
+
+    UPDATE jobs SET process_id = ? WHERE process_id IS NULL ORDER BY ID ASC LIMIT 1;
+    SELECT * FROM jobs WHERE process_id = ? [ORDER BY ID LIMIT 1];
+
+https://stackoverflow.com/a/59164253
+
+    SKIP LOCKED
+
+https://vladmihalcea.com/database-job-queue-skip-locked/
+
+    SKIP LOCKED explained
