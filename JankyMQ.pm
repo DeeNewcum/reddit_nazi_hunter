@@ -71,10 +71,12 @@ sub dequeue {
 sub dequeue_finish {
     my ($self) = @_;
 
-    $self->{connection}->do("DELETE FROM $self->{table} WHERE ID=?",
-                    undef, $self->{last_dequeued});
+    if (defined($self->{last_dequeued})) {
+        $self->{connection}->do("DELETE FROM $self->{table} WHERE ID=?",
+                        undef, $self->{last_dequeued});
 
-    $self->{last_dequeued} = undef;
+        $self->{last_dequeued} = undef;
+    }
 }
 
 
